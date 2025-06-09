@@ -1,0 +1,164 @@
+<< git >> - 버전관리도구
+
+    - 소스, 버전관리 라고 얘기함
+    - 리눅스 창시자 : 리누스토발즈가 개발
+        * 버전관리도구 : git, svn(subversion)
+        * 엔터 하나도 전부 기록에 남김 (같은 파일을 작업하면 엔터로 충돌이 나기도 함)
+
+    <git 동작방식>
+        => 시간순으로 프로젝트의 스냅샷 저장 : commit을 해야 저장해줌
+            => 달라진 부분만 저장해 줌
+
+
+    <vscode 와 git>
+        => git bash 와 vscode 터미널의 bash는 같은 것!
+
+    <저장소>
+        1) 로컬저장소 : 내가 작업했던 컴퓨터
+        2) 원격저장소 : github
+
+
+    <git 영역>
+        1) working 디렉토리 : 현재 작업중인 폴더
+            => git init 명령이 수행된 디렉토리
+            - 새파일 작성 (Untracked files) : 버전관리 원할시, staging 영역으로 보내야 함
+        2) staging : 작업 폴더에 있던 것을 끌어 올린 상태
+            - git commit -m "메세지 내용" : 로컬 저장소로 보냄
+        3) repository(로컬 저장소) : 최종 저장 상태 영역
+
+
+    <git 파일 상태> : 파일의 라이프사이클
+        1) Untracked : 새파일 작성 상태
+        2) Unmodified : commit이 된 상태
+        3) modified : 수정된 상태
+            1) git add 파일명
+            2) git restore 파일명
+        4) staged(인덱스영역) : 파일을 add한 상태
+            => New file인 경우
+            1) git rm --cached 파일명 : Untracked 상황
+            2) git restore --staged 파일명 : Untracked 상황
+            3) git commit -a -m "메시지" : add + commit 동시 처리
+
+
+    <git 설치> : 사용자 설정
+        => git config --global user.name "이름"
+        => git config --global user.email "이메일 주소"
+            * global : 어디서, 어떤 작업을 하던지 간에 무조건 위의 사용자로 해주세요
+                => 누가 한건지 명확하게 하기 위해서
+            * 위에 화살표 : 이전에 사용했던 명령어 불러올 수 있음
+
+
+    <gitignore>
+        => git 에서 관리 대상이 아닌 파일 작성
+        => 프로젝트 초반에 하기 (commit 해놔야 함!)
+            => 기존 관리대상 파일이 이미 저장소에 들어갔으면 나중에 관리대상에서 제외하고 싶다고 해서 제외해주지 않음
+            => 관리대상 제외 : git rm --cached 파일명 => git commit -m "메세지" (제외한 파일에 대한 로그 남기기)
+
+
+    - <branch> : 서로 독립적임 (한번 갈라지고 나서 부터는 서로의 작업에 영향을 주지 않음)
+        => 기본 branch명 : 예전에는 줄로 master로 사용했었음
+            => 현재는 main 사용
+        => main 브랜치는 놔두고 새로운 브랜치에서 특정 작성 수행
+            => 브랜치별로 관리 가능
+            => main 브랜치 + 새로운 브랜치 작업 merge 가능
+            => 팀작업
+
+
+    <원격(remote) 저장소>
+        1) github : MS꺼임
+        2) gitlab
+
+        - github repository 생성
+            => github 에서 생성 가능
+        
+        - 원격저장소와 로컬저장소 연동
+            => git remote add origin https://github.com/dydwoj/test.git
+
+        - github에서 직접 변경
+            => main과 직접연관이 있는 origin 에서의 변경으로 로그에 남김
+
+
+    <clone> : 복제
+        => 본인이 작성한 것은 물론 타인이 작성한 것도 복제가 가능
+        => git 설치 후 환경설정을 한 이후에 복제 가능
+
+
+    <git 명령어>
+        1) git config --list : config 설정 확인
+
+        2) git init : working 디렉토리로 만들기
+            => 해당 폴더 위치에 .git을 만들어줌 => 올릴 준비가 된 상태
+            => vscode의 Initialize Repository 를 해주는 명령어
+
+        3) git status : 현재 작업물 상태
+            => vscode의 changes에 뜨는 의미 : untracked files
+
+        4) git add 파일명 : staging 영역으로 보내줌 (최종 저장 전에 임시로 올리는 것)
+            => vscode의 stage all change 의 의미
+            git add . : (.) 을 추가하면 모든 파일을 의미함
+
+        5) git commit -m "메세지 내용" : 로컬 저장소로 보냄
+            => git commit 만 작성하면 메세지를 주도록 강제로 새창(리눅스창)이 실행됨
+            => i(insert)키를 눌러 변경 => 메세지 작성 => esc => : wq
+
+        6) git log --graph : 어떤 작업들을 하고 로그를 남겼는지 확인
+            git log -숫자 : 최근 숫자만큼의 기록을 보겠다는 의미
+
+        7) clear : terminal 로그들 청소
+
+        8) git commit -a -m "메시지" : modified인 상태의 파일을 add + commit 동시 처리
+
+        9) git restore 파일명 : 파일의 마지막 commit 을 기준으로 수정된 내용들을 제거
+            => (modified 상태였던 파일을 로컬저장소로 보냄)
+            git restore --staged 파일명 : staging 상태에서 add 전 상태로 내림
+            git rm --cached 파일명 : 이전 상태로 내림 (Untracked files)
+            => 리눅스명령어(remove)
+            => delete
+
+        10) git commit --amend : 직전 commit을 취소시킴
+            => 새로운 파일과 같이 로그창에 묶고 싶을때도 사용
+
+        11) git revert : commit 취소, 취소에 대한 로그 남기기
+            => 커밋에 기록된 내용들을 전부 지워버림
+
+        12) git diff : 로컬저장소에 있는 내용과 modified 상태인 파일의 내용의 차이점을 비교
+            => --- : 빠진 내용 / +++ : 추가된 내용
+            git diff --staged : staged 영역의 파일 차이 확인
+
+        13) git reset (3단계가 존재)
+            1) git reset --soft : 파일 수정 내용은 남고 커밋(로그)만 제거
+                => 로그(commit)에 남아 있는 커밋 기록들 중 하나를 기준으로 나중에 작성된 로그만 전부 제거됨
+            2) git reset --hard : 파일 수정 내용 제거되고 커밋도 제거
+                => 주의 필요! : 새로 생성한 파일, 수정된 파일 전부를 기준 파일을 기점으로 전부 제거함
+            3) git reset --mixed : 파일 수정 내용은 남고 커밋 제거되고, 파일이 unstaged 영역으로 감
+
+        14) git branch : 현재 branch 확인 (vscode 왼쪽 하단에 현재 branch 확인 가능)
+            => *이 붙은 것이 현재 내가 있는 branch
+            git branch -m master main : 브랜치명 변경 (master -> main)
+            git branch 브랜치명 : 새로운 브랜치 생성
+            git checkout 브랜치명 : 해당 브랜치로 이동
+            => 가장 처음에 수행될 때는 main 브랜치 내용 복사 + 이동
+            => 두번째 부터는 그냥 이동만
+            => modified 상태의 파일을 두고 옮기면 경고문 뜸!
+            git merge 합칠브랜치명 : 현재 있는 브랜치에 해당하는 브랜치를 불러와서 합침
+            => 서로 다른 내용들이 커밋된 상태에서 merge 하면 conflict 일어남
+
+        15) git remote -v : 로컬에서 원격저장소 확인
+            git remote add origin 깃허브repository 주소
+            => origin 은 주소가 너무 기니까 붙인 별칭
+            git push : 로컬저장소(main)를 기준으로 원격저장소와 동기화 (싱크 맞추기)
+            => git push -u origin main : main commit 을 원격저장소와 동기화 (싱크 맞추기)
+            git fetch 원격저장소명(origin) : 원격저장소를 기준으로 로컬저장소(main)를 동기화시키기 위해서 포인터를 가져오기
+            => 변화된 부분이 어디인지 가져옴
+            => merge 해야 포인터에 맞춰서 병합이 됨 (찐동기화)
+            => conflict 가 발생할 수도 있음 (merge의 내용과 동일)
+            git pull 원격저장소명 : fetch + merge 한번에 처리
+
+        16) cd .. : 한단계 상위 폴더로 이동 (리눅스 명령어)
+
+        17) git remote remove 원격저장소명 : 원격저장소와의 연동 끊기
+
+<< git 서버에서 new repository 하기 >>
+    owner : 나
+    name : dydwoj.github.io
+    add a README file 체크
