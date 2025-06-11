@@ -1,0 +1,46 @@
+<< 몽고DB >>
+
+    만든 유저 아이디 : dydwoj
+    만든 유저 비번 : BTW4NOxKROZyov2K
+
+    만든 유저 접속 url : mongodb+srv://test:<db_password>@cluster0.owgglvt.mongodb.net/
+
+    파이썬에 몽고db 설치
+        => pip install pymongo
+
+    < 쿼리문 >
+        영화 상영 시간이 100분 이상인 영화
+        {runtime:{$gte:100}}
+
+        미국에서 개봉되었으며 IMDB 평점이 7 이상
+        {countries:"USA", "imdb.rating":{$gte:7}}
+
+
+        개봉연도가 1920년 이전 개봉된 영화
+        {year:{$lt:1920}}
+
+
+        영화 장르가 Animation 이거나, Crime 인 영화 조회
+        {genres:{$in:["Animation","Crime"]}}
+
+
+        개봉연도가 1925년 ~ 1919년 사이에 개봉된 영화
+        {year:{$gte:1915, $lt:1920}}
+
+        db["movies"].find() == select * from movies
+        db["movies"].find({runtime:{$gte:100}}) == select * from movies where runtime >= 100
+
+        멕시코에서 개봉되었으며, IMDB 평점이 6 이상인 영화 조회
+        (Mexico)
+        db["movies"].find({countries:"Mexico", "imdb.rating":{$gte:6}})
+
+        2010년에 개봉했고 영화상을 5개 이상 수상했거나 장르가 Drama 인 영화 조회
+
+        제목이 Winsor McCay의 year => 2024로 수정하기
+        db.movies.updateOne({title:"Winsor McCay"}, {$set:{year:2024}})
+
+        제목이 In the Land of the Head Hunters 삭제
+        db.movies.deleteOne({title:"In the Land of the Head Hunters"})
+
+        삽입 (users db에서 작성)
+        db.users.insertOne({name:"Kim", email:"kim@gmail.com", password:"12345"})

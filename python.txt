@@ -46,6 +46,15 @@
     * 주석 : #
       여러줄 주석 : """  """ => 사이에 여러줄 주석을 넣을 수 있음
 
+    < 외부 라이브러리 설치하는 법 >
+        - 설치
+            => pip install 라이브러리명 (현재 가상환경에 설치)
+        - 제거
+            => pip uninstall 라이브러리명
+        
+        - 설치 목록
+            1. oracledb
+            
     < 특징 >
         1) 작성시 마지막에 세미콜론(;) 사용 X
         2) {} 이 없음 (묶을 수 없음)
@@ -500,7 +509,7 @@
                     => 전체 불러오기는 import * 로 가능
 
 
-        - math()
+        - math
 
             1) ceil()
             2) floor()
@@ -510,26 +519,54 @@
             => java 의 math.random 과 같은 개념
             => 0.0 <= x < 1.0
 
-            1) uniform
+            1) uniform()
                 => uniform(x,y) : x ~ y 사이의 임의의 float 값 리턴
-            2) randrange
+            2) randrange()
                 => randrange(max) : 0 ~ max 사이의 int 값 리턴
                 => randrange(min, max) : min ~ max 사이의 int 값 리턴
-            3) choice
+            3) choice()
                 => choice(리스트) : 리스트에서 임의의 하나
-            4) shuffle
+            4) shuffle()
                 => shuffle(리스트) : 리스트 내부의 요소들을 랜덤하게 섞기
-            5) sample
+            5) sample()
                 => sample(리스트, k=값) : 리스트 요소 중에서 k개 뽑기
 
         - time
 
-            1) sleep
+            1) sleep()
                 => sleep(값) : 해당하는 값 만큼 해당 줄에서 정지 -> 이후 값 지나면 뒤에 코드 실행
             2) time()
                 => 1970-01-01 기준으로 지난 시간 초단위로 리턴
+            3) weekday() : 요일을 숫자로 처리 (월 - 0)
+            4) asctime() : 우리에게 그나마 익숙한 형태로 출력
+                => ex) Tue Jun 10 09:55:27 2025
+            5) localtime()
 
         - datetime
+            1) now() : 현재 시간 리턴
+            2) today() : 현재 시간 리턴
+
+        < 내장 함수 >
+
+            1) enumerate() : 리스트, 튜플, 문자열을 입력받아 인덱스와 enumerate 객체 리턴
+                => 인덱스를 쓸 수 있어서 크롤링에 유용함
+
+            2) 형변환 함수
+                1. int() : int(문자 숫자) => int형 숫자
+                    => 소수점은 반올림이나 내림이 아닌 그냥 잘라버림
+                2. float() : 실수 -> float
+                    => 일반 실수 숫자도 float 로 변경
+                3. str() : 문자로 형변환
+
+            3) len() : 리스트 구조 길이 구하는 함수
+
+            4) list() / tuple() : tuple <==> list 상호 변경
+                1.  sort() : list 내장함수 : 정렬 기능
+                    => default : 오름차순
+                    => sort(reverse.True) : 내림차순
+                    => 원본 자체를 정렬함
+
+            5) sorted() : 원본 정렬 X => 리스트 정렬 후 그 결과를 새로운 리스트로 리턴
 
         < 모듈 만들기 >
             참고 : basic/mod1
@@ -547,3 +584,98 @@
                         if __name__ == "__main__"
                             테스트 코드
                         => .py 를 제외하면 테스트 코드 작동 안함
+
+    < 예외 처리 >
+        참고 : basic/edcept
+        => java 의 try/catch 와 같음
+        
+        * SyntaxError : 문법 에러
+        * RunTimeError : 실행 중 발생하는 에러
+
+        < 에러의 종류 >
+        1) NameError : 변수 선언 암함
+        2) ZeroDivisionError : 0 으로 나눴음
+        3) IndexError
+        4) KeyError
+        5) ValueError
+
+        < try/catch >
+
+            - 기본 구조
+                try:
+                    에러 발생할 가능성이 있는 코드
+                except 에러명 as e:
+                    해당 에러가 발생할 경우 처리할 코드
+                else:
+                    에러가 발생하지 않았을 경우 실행할 코드
+                finally:
+                    에러와 상관없이 무조건 실행할 코드
+                
+                * else : 명확하게 처리하고 싶을 때 사용
+                    => 즉, 있어도 되고 없어도 되고
+                * 어떤 에러가 나는지 모를경우 : Exception
+                    => 에러명 자리에 대입
+            
+            - raise : 예외 직접 발생
+
+    < 데이터베이스 (DB) >
+        참고 : basic/database
+
+        < DB 연동 >
+            참고 : database1
+
+            1) 내장 DB
+                => SQLite : import sqlite3
+
+                - DB 생성
+                    1. conn = sqlite3.connect("./test.db", isolation_level=None)
+                        * isolation_level : autocommit 하지 않기
+                    2. cursor = conn.cursor()
+
+                - 테이블 생성
+                    sql = "create table if not exists users(id integer primary key, username text, email text, phone text, website text, regdate text)"
+                    cursor.execute(sql)
+                        => executemany 를 통해 여러개의 데이터 삽입 가능
+                        => 튜플 형식으로 만들어야 함
+
+                - create(insert)
+                    sql = "insert into users(id, username, email, phone, website, regdate) "
+                    sql += "values(1, 'kim', 'kim@gmail.com', '010-1234-1234', 'Kim.com',?)"
+                    cursor.execute(sql, (nowDateTime,))
+                    
+                    * ? : 튜플로 지정하기
+                        => 튜플은 쉼표가 필요함!
+                
+                - Read (조회)
+                    1) 쿼리문 작성
+                    2) cursor.execute() 실행
+                    3) fetch 실행
+                        1. fetchone() : 한개만
+                        2. fetchmany() : 사이즈 조절해서 뽑아오기 가능
+                            => (size=값)
+                        3. fetchall() : 무조건 리스트로 반환
+
+                - update (수정)
+                    1) 쿼리문 작성
+                    2) cursor.execute() 실행
+
+                - DB 닫기
+                    conn.close()
+            
+            2) Oracle DB
+                참고 : database2
+                => CRUD 는 똑같음
+
+                * ? 를 통해서 찾는거 안됨
+                    => but. java 처럼 -> :컬럼명 가능
+                    => :숫자 -> 이것도 가능
+
+                - DB 연결
+                    conn = oracledb.connect(user="c##java", password="12345", dsn="localhost/xe")
+                    cursor = conn.cursor()
+            
+            3) 몽고 DB
+                참고 : database3
+
+                - 설치
+                    pip install pymongo
