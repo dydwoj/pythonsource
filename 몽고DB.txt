@@ -8,6 +8,9 @@
     파이썬에 몽고db 설치
         => pip install pymongo
 
+    < DB 생성 >
+        db 네임 설정 -> 컬렉션 네임 설정
+
     < 쿼리문 >
         영화 상영 시간이 100분 이상인 영화
         {runtime:{$gte:100}}

@@ -1,0 +1,52 @@
+<< 크롤링 >>
+    참고 : crawl
+
+    < open api 목록 >
+        1) 네이버 api 검색 기능
+            id : YLPcyRzSCyVPhrp4HzrV
+            client secret : We7CJm5vgN
+        2) 서울 열린데이터 광장
+
+    * EUC-KR : 인코딩과 관련이 있고 예전에 사용한 방식
+        => 요즘엔 utf-8 사용
+
+    < 크롤링 vs 스크랩핑 >
+        - 크롤링 : 주기적으로, 무작위로 데이터 수집하는 것
+            => 데이터 양을 우선시
+            => 사이트에서 허용하는 경로만 가능
+        
+        - 스크랩핑 : 어떤 특정 카테고리를 선택해서 데이터를 수집
+            => 크롤링보다 작은 개념
+
+    < 파이썬 기본 제공 >
+        참고 : crawl1
+
+        1. urlretrieve : 요청하는 url 정보를 로컬파일로 저장
+        2. urlopen() : 해당 홈페이지의 정보값을 가져옴
+
+    < 외부 라이브러리 >
+        참고 : crawl1
+
+        1) requests
+            설치 : pip install requests
+            => 내용 가져오기
+            => urllib.equest 모듈과 같은 역할
+            => 디코딩도 알아서 해주고, json 처리도 편함
+            => get, post, put, delete 메서드 제공함
+            => 세션 적용 가능
+
+        2) fake_useragent
+            설치 : pip install fake_useragent
+            => 파이썬 프로그램이 아니고 브라우저 요청으로 들어간다고 하는 내용
+        
+        3) BeautifulSoup
+            설치 : pip install beautifulsoup4
+            => requests 와 함께 쓰는 라이브러리
+            => 태그를 가진 html 의 element 요소 전체를 담아옴
+                => 이렇게 나오면 우리가 원하는 태그의 내용만 담을 수 있음!
+
+            - 사용법
+                BeautifulSoup(내용, "파서 지정")
+                    => 내용 : requests 로 가져온 내용
+                    => 파서 : 우린 html.parser 로 사용
+            
