@@ -479,6 +479,9 @@
             - dumps : dict 구조를 문자열로 처리
             - load : json 파일을 읽어서 dict 구조로 처리
             - dump : dict 구조를 json 으로 처리
+        
+        - 크롤링 해서 csv 파일 쓰기
+            참고 : crawl/crawl2
 
     < 클래스 >
         참고 : basic/class
