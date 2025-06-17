@@ -710,3 +710,23 @@
                 4) finditer()
                 5) replace()
                 6) compile()
+
+    < selenium >
+        참고 : crawl3
+        => 천천히 중간에 쉬는 시간을 주어야 함 (time 걸기)
+
+        - 설치
+            pip install selenium
+        
+        - 개념
+            => 자동으로 특정 url 주소에서 행위를 시도하게 하는 것
+            => 해당 주소의 제목, url, page_source 가져올 수 있음
+
+        - 메서드
+            1) find_element()
+                => By 모듈을 이용해서 가져와야함
+                1. send_keys("키값")
+            2) close()
+                => 주도권을 가진 창만 닫기
+                => 모든 스크립트 닫기 : quit()
+                안뇽 나는 미경이 너의 여자친구지 매우 피곤한 상태야 바부야
