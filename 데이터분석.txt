@@ -1,0 +1,7 @@
+<< 데이터 분석 >>
+
+    < 설치 라이브러리 >
+        1) pip install pandas
+        2) pip install seaborn
+
+    
