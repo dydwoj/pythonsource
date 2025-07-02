@@ -1,0 +1,217 @@
+<< 데이터 분석 >>
+    참고 : analytics
+
+    < 설치 라이브러리 >
+        1) pip install pandas
+            => import pandas as pd -> 판다스는 무조건 거의 pd 로 명칭
+            => 판다쓰는 읽어오는 것 말고도, 전처리 작업을 할때도 사용함
+        2) pip install seaborn
+            => import seaborn as sns -> 씨본도 거의 sns 로 명칭
+            => 데이터 셋을 가지고 있지 않음 -> 시각화를 위한 도구
+        * numpy
+            import numpy as np
+            => 기본 파이썬 라이브러리 : 과학계산 및 수학계산용 라이브러리
+
+    < 데이터분석의 단계 >
+        pandas로 수집 => 전처리 => 분석 => 시각화(그림으로 뽑아주기)
+            => matplotlib 이 시각화에서의 기본중의 기본임
+
+<< numpy >>
+    참고 : numpy
+    => C, C++ 로 작성됨
+
+    < 넘파이 배열 >
+        => 머신러닝에서 사용하는 데이터 구조
+
+        - 1차원 배열 -> 벡터
+            ex) arr1 = np.array([1,2,3])
+
+        - 2차원 배열 -> 매트릭스
+            ex) arr2 = np.array([[1,2,3],[4,5,6]])
+
+        - 차원 바꾸기
+            1. 1차원 -> 2차원
+                배열2 = 기존배열.reshape(행, 열)
+
+
+    < 넘파이 배열 생성 함수 >
+
+        * default dtpye = float64
+        1) np.arange(시작수, 끝수(미포함))
+            => 시작수, 끝수에 따라 크기 결정됨
+
+        2) np.zeros(크기, dtype='')
+            => 2차원
+                ex) np.zeros((2,3), dtype='int64')
+
+        3) np.ones(크기, dtype='')
+            => 2차원은 zerops 와 동일
+
+        4) np.empty(크기, dtype='')
+            => 이렇게만 주면 이상한 숫자가 나옴 -> 무작위로 숫자를 부여함
+
+        5) np.full(크기, 숫자(fill value))
+            * fill value : 어떤 값으로 배열을 채울 것인지
+
+        6) np.eye(3)
+            => 단위행렬을 만들어줌 (ex. 대각선은 3, 나머지는 0)
+                => 숫자만큼 대각선의 합이 주어진 숫자에 맞게 함
+            np.eye(4, k=-1)
+                * k : 첫 행은 없애고 나머지 행렬의 대각선 값이 도합 3이 되게 만들어줌
+        
+        7) np.linspace(시작수, 끝수, 숫자)
+            * 숫자 : 시작수와 끝수는 정해두고 균등하게 숫자만큼 분할된 값을 반환
+        
+        8) np.random.rand(시작수, 끝수)
+            => 시작수, 끝수에 맞는 배열 생성후 0 ~ 1 값으로 채워줌
+
+        9) np.random.randn()
+            => 정규분포로 샘플링된 값 반환
+
+        10) np.random.randint(시작수, 끝수, 크기)
+            => 시작수와 끝 수 사이에 무작위로 숫자를 지정한 크기에 맞는 배열에 맞게 생성
+            ex) np.random.randint(1,100, (3,5))
+                => 1 ~ 100 사이의 숫자값을 3행 5열에 대입해서 만들어줌
+            
+            * np.random.seed(아무숫자)
+                => 실행했을때 랜덤은 자꾸 숫자를 바꾸므로, 숫자를 고정시켜주는 것
+
+        11) np.random.choice(숫자, (행, 열), replace=True/False)
+            => 행, 열에 맞게 랜덤 숫자를 선택해서 생성
+            => 숫자대신 내가 배열을 생성해서 그 배열 안의 값 중에서 랜덤하게 뽑아서 사용 가능
+            * replace=True/False : 중복 허용/금지
+        
+        
+    *** 인덱싱 / 슬라이싱 가능 ***
+        * 1차원, 2차원 전부 가능
+            => 대신 1차원은 [숫자]에 따라 값 1개지만 2차원은 해당 숫자의 배열 그 자체가 나옴
+
+        - 2차원 슬라이싱
+            ex) array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+                2차원 배열이 있을때
+
+                슬라이싱 시, print(arr2[0:2, 0:1]) 
+                => 결과 값 : [[1]
+                            [4]]
+                        => why? 앞의 0:2 는 배열 1,2,3 그리고 4,5,6 을 끌고옴
+                            여기서 뒤의 0:1 은 그중 각 배열의 첫번째인 1, 4를 가져왔음
+            
+        - boolean 인덱싱
+            ex) arr1 = array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+                arr1[arr1 % 2 == 0] -> array([2, 4, 6, 8]) 이 추출됨
+        
+    < 연산 >
+        => 일반적인 배열은 사칙연산이 안되지만 넘파이 배열은 사칙연산이 가능 / 함수로 처리도 가능
+
+        - 사칙연산
+            + / np.add()
+            - / np.substract()
+            * / np.multiply()
+            / / np.divide()
+
+        - 그외
+            np.mean()
+            np.var()
+
+<< matplotlib >>
+    참고 : matplotlib
+    => 시각화를 위한 라이브러리
+    => 동적 기반 (pandas, seaborn 은 정적임)
+
+    < 설치 라이브러리 >
+        1) pip install matplotlib
+
+        2) pip install koreanize_matplotlib
+            => matplotlib 의 한글처리를 위한 라이브러리
+    
+    < 라이브러리 로드 >
+        import matplotlib.pyplot as plt
+            => 보통은 plt 로 많이 사용
+
+    * 주피터 노트북 특성상, plt.show() 안써도 무관하긴 함
+        but. plt.show() 를 사용하면 주소도 지울수 있음 (== 타이틀)
+        or 변수명 = 으로 마지막에 쓰는 plt 를 받아줘도 무관
+
+    < 그래프 나타내기 >
+
+        - 리스트
+            x = [1, 2, 3, 4]
+            y = [12, 43, 25, 15]
+
+            plt.plot(x, y)
+        
+        - 딕셔너리
+            dict1 = {
+                "data_x":[1,2,3,4,5],
+                "data_y":[2,3,5,10,8]
+            }
+
+            plt.plot("data_x", "data_y", data=dict1)
+
+        < 그래프 설정 >
+
+            - 타이틀 설정
+                plt.title()
+                    1. "" : 이름 설정
+                    2. fontdict={} : 스타일 설정
+                    3. loc="" : 위치 설정 (left/center/right)
+            
+            - 축제목 설정
+                plt.x(y)label()
+                    1. "" : 이름설정
+                    2. fontdict={} : 스타일 설정
+                    3. loc="" : 위치 설정 (left/center/right) 
+                        => y축의 경우 : (top/bottom/center)
+                    4. color="" : 색상 설정
+
+                    * **kwargs 를 사용해서 직접 설정해도 되지만 fontdict 를 이용해도 됨
+                    * 따로 dict 구조로 만들어서 fontdict=만든dict 해도 가능
+                    * family : 폰트를 의미 -> windows 안에 있는 글씨를 지정해서 해주면 됨
+
+            - 축의 눈금 설정
+                참고 : 02. 축
+
+                plt.x(y)ticks()
+                    1. [] : 배열로 수치를 직접 작성해서 눈금 설정이 가능
+
+            - 범례 설정
+                참고 : 03. 범례
+
+                plt.legend()
+                    => plot(label="") : legend 안이 아닌 plot 에서 설정가능
+
+                    1. 색상 설정
+                        => color 를 그래프에 주면 그 색상 그대로 같이 감
+
+                    2. 위치 설정
+                        loc= 
+                            1(upper right)
+                            9(upper center)
+                            2(upper left)
+
+                            6(center left)
+                            10(center)
+                            5(right) / 7(center right)
+
+                            3(lower left)
+                            8(lower center)
+                            4(lower right)
+                    
+                    3. 폰트 사이즈 설정가능
+                        plt.legend(fontsize=값)
+
+                    4. 범례 행 수 지정
+                        plt.legend(ncol=값)
+                            2 : 가로
+                            1 : 세로
+
+            - 스타일 설정
+                참고 : 04. 스타일
+
+        < 그래프 차트 모양 결정 >
+
+            1) plot() : 선 차트
+            2) bar() : 막대 차트 / barh() 수평막대 차트
+                => 참고 : 07. 다양한 그래프 생성
