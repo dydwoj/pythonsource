@@ -16,6 +16,11 @@
         pandas로 수집 => 전처리 => 분석 => 시각화(그림으로 뽑아주기)
             => matplotlib 이 시각화에서의 기본중의 기본임
 
+<< gemini >>
+    npm install -g @google/gemini-cli => git bash 에 작성
+
+    set-executionPolicy remotesigned => powershell 관리자권한으로 실행후에 사용
+
 << numpy >>
     참고 : numpy
     => C, C++ 로 작성됨
@@ -118,13 +123,16 @@
 << matplotlib >>
     참고 : matplotlib
     => 시각화를 위한 라이브러리
-    => 동적 기반 (pandas, seaborn 은 정적임)
+    => 정적 기반 (pandas, seaborn 은 동적임)
 
     < 설치 라이브러리 >
         1) pip install matplotlib
 
         2) pip install koreanize_matplotlib
             => matplotlib 의 한글처리를 위한 라이브러리
+        
+        3) pip install wordcloud
+            => 텍스트를 위한 라이브러리
     
     < 라이브러리 로드 >
         import matplotlib.pyplot as plt
@@ -215,3 +223,13 @@
             1) plot() : 선 차트
             2) bar() : 막대 차트 / barh() 수평막대 차트
                 => 참고 : 07. 다양한 그래프 생성
+            3) pie() : 원형차트
+                => 참고 : 11. 원그래프
+            4) scatter() : 산점도 차트
+                => 참고 : 12. 산점도 그래프
+    
+    < 텍스트의 시각화 >
+        참고 : matplotlib
+
+        < 설치 라이브러리 >
+            
