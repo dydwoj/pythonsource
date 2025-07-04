@@ -11,6 +11,10 @@
         * numpy
             import numpy as np
             => 기본 파이썬 라이브러리 : 과학계산 및 수학계산용 라이브러리
+        
+        * 설치할때 옵션을 붙일수 있음
+            ex) !pip install -q plotly
+                => 여기서의 q 는 설치내역이 안나오게 하는 코드임
 
     < 데이터분석의 단계 >
         pandas로 수집 => 전처리 => 분석 => 시각화(그림으로 뽑아주기)
@@ -232,4 +236,31 @@
         참고 : matplotlib
 
         < 설치 라이브러리 >
+
+    < 동적으로 시각화하기 >
+        참고 : analytics/plotly
+
+        < 설치 라이브러리 >
+            1) pip install plotly
+            2) pip install nbformat
+        
+        < plotly >
+            => plotly 를 이용해서 동적으로 시각화가 가능
+            => 두가지의 모듈로 구성이 되어 있음
+
+            1) Plotly Express (px)** 모듈
+                => 몇 줄의 코드로 빠르게 시각화가 가능
+                => pandas DataFrame 과 연동 됨
+                => 단점은 상세한 레이아웃 설정, 수정, 커스터마이징에는 한계가 존재
+
+                - 함수
+                    update 기능
+                        1) fig.update_layout() : 전체 레이아웃(제목, 범례, 여백) 수정
+                        2) fig.update_xaxes() : x 축(제목, 글꼴, 눈금) 수정
+                        3) fig.update_yaxes() : y 축(제목, 글꼴, 눈금) 수정
+
+            2) Plotly Objects (go)** 모듈
+                => 상세한 레이아웃 설정, 수정, 커스터마이징의 위의 단점들을 커버하기 위해 직접 구성 가능
+                => 단점은 복잡함
+
             
