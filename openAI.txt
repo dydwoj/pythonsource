@@ -1,0 +1,11 @@
+<< openAI >>
+    참고 : openai
+
+    < 설치 라이브러리 >
+        1) pip install -q openai
+            => python openai 라이브러리 설치
+
+        2) pip install -q python-dotenv
+            => .env 파일 라이브러리 설치
+
+    < chat 내용을 외부로 보내기 >

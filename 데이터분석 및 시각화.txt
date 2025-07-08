@@ -8,6 +8,18 @@
         2) pip install seaborn
             => import seaborn as sns -> 씨본도 거의 sns 로 명칭
             => 데이터 셋을 가지고 있지 않음 -> 시각화를 위한 도구
+
+        3) pip install jinja2
+            => style 이용
+
+        4) pip install scikit-learn
+            => 데이터 벡터화에 이용
+        
+        5) pip install pecab
+            => 품사, 형태소 분석하는 도구
+           pip install tqdm
+            => pecab 이용
+        
         * numpy
             import numpy as np
             => 기본 파이썬 라이브러리 : 과학계산 및 수학계산용 라이브러리
