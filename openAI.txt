@@ -8,4 +8,16 @@
         2) pip install -q python-dotenv
             => .env 파일 라이브러리 설치
 
+        3) pip install youtube-transcript-api
+            => youtube 영상 요약
+
     < chat 내용을 외부로 보내기 >
+
+        < python >
+            참고 : flasksource/openai
+
+        < 리액트 >
+            참고 : reactsource/begin
+
+            - 설치 라이브러리
+                1) yarn add openai
