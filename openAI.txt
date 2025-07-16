@@ -11,6 +11,20 @@
         3) pip install youtube-transcript-api
             => youtube 영상 요약
 
+        4) pip install googletrans
+           pip install deepl
+            => 구글, deepl 번역 라이브러리
+
+        5) pip install -q google-genai
+            => gemini
+
+        6) pip install streamlit
+            => 가장 손쉽게 가상 서버를 여는 라이브러리
+            참고 : openai/streamlit
+
+            < 기본 띄우는 형식 >
+                streamlit run 파일명
+
     < chat 내용을 외부로 보내기 >
 
         < python >
@@ -21,3 +35,25 @@
 
             - 설치 라이브러리
                 1) yarn add openai
+
+    << Lang Chain >>
+        참고 : langchain
+        => 여러가지 다른 LLM 모델의 언어들을 하나로 모아서 연결 해주는 역할
+        => ex) 스프링부트(프레임워크) == 랭체인
+            => 프레임 워크 같은 느낌임
+
+        < 설치 라이브러리 >
+
+            1) pip install -q langchain
+            2) pip install -q langchain-community
+            3) pip install -q tiktoken
+            4) pip install -q langchain-openai
+
+            - pdf 로드를 위한 라이브러리
+                1) pip install -q pypdf2
+                2) pip install -q langchain-community faiss-cpu
+
+        * LLM(Large Langauage Models)
+            => 방대한 데이터를 학습하여 자연어 처리 작업을 수행하는 인공지능 모델
+            => OpenAI Hugging Face, Claude 등 다양한 모델 쉽게 연결
+            Chains : 여러개의 LLM 호출을 연결
